@@ -55,18 +55,12 @@ class StoresController extends AppController {
 	public function step2() {
 		
 		$token = $this->request->query['token'];
-		debug($token);
+		$paypal = $this->Paypal->GetShippingDetails($token);
 		
-		$PayerID = $this->request->query['PayerID'];
-		debug($PayerID);
-		
-		$resArray = $this->Paypal->GetShippingDetails($token);
-		
-		debug($resArray);
-
-		$ack = strtoupper($resArray["ACK"]);
+		$ack = strtoupper($paypal["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
-			$this->Session->write('Paypal.Customer', $resArray);
+			$this->Session->write('Paypal.review', $resArray);
+			$this->redirect(array('action' => 'review'));
 		} else {
 			$ErrorCode = urldecode($resArray["L_ERRORCODE0"]);
 			$ErrorShortMsg = urldecode($resArray["L_SHORTMESSAGE0"]);
@@ -80,10 +74,14 @@ class StoresController extends AppController {
 			die();
 		}
 		
-		debug($this->request);
+		// debug($this->request);
 	}
 
-
+	public function review() {
+		$cart = $this->Session->read('Cart');
+		$paypal = $this->Session->read('Paypal.review');
+		$this->set(compact('cart', 'paypal'));
+	}
 
 	public function confirm() {
 		
