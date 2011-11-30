@@ -59,7 +59,7 @@ class StoresController extends AppController {
 		
 		$ack = strtoupper($paypal["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
-			$this->Session->write('Paypal.review.', $paypal);
+			$this->Session->write('Paypal.Details', $paypal);
 			$this->redirect(array('action' => 'review'));
 		} else {
 			$ErrorCode = urldecode($paypal["L_ERRORCODE0"]);
