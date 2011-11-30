@@ -5,7 +5,6 @@
 <title><?php echo $title_for_layout; ?></title>
 <?php echo $this->Html->css(array('css.css', '960_24_col.css')); ?>
 <?php echo $this->Html->script(array('http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js')); ?>
-
 <?php echo $scripts_for_layout; ?>
 </head>
 <body>
@@ -15,7 +14,7 @@
 <br /><br />
 <div id="top">
 	<div id="menu">
-		<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?> &nbsp; 
+		<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?> &nbsp;
 		<?php echo $this->Html->link('Cart', array('controller' => 'stores', 'action' => 'cart')); ?>
 	</div>
 </div>

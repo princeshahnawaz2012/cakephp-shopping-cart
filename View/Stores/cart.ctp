@@ -10,7 +10,7 @@
 <?php if(empty($items)) : ?>
 	Shopping Cart is empty
 <?php else: ?>
-	
+
 <?php echo $this->Form->create(); ?>
 
 <div class="container_24">
@@ -37,7 +37,7 @@
 	<div class="grid_4">
 		<div class="red bold right">$<?php echo $item['subtotal']; ?></div>
 	</div>
-	
+
 	<div class="clear"></div>
 
 <?php endforeach; ?>
@@ -46,20 +46,20 @@
 		<p class="right">
 			<p class="red bold right">
 				SubTotal: $<?php echo $cartTotal; ?>
-			
+
 				<br />
 				<br />
-			
+
 				<?php echo $this->Form->button('Recalculate'); ?>
 				<?php echo $this->Form->end(); ?>
 
 				<br />
-			
+
 				<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'stores', 'action' => 'step1'))); ?>
 				<input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal' class="sbumit" />
 				<?php echo $this->Form->end(); ?>
 			</p>
-		
+
 		</p>
 	</div>
 

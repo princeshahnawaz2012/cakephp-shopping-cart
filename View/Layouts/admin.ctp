@@ -15,8 +15,8 @@
 <br /><br />
 <div id="top">
 	<div id="menu">
-		<?php echo $this->Html->link('Orders', array('controller' => 'orders', 'action' => 'index', 'admin' => true)); ?> &nbsp; 
-		<?php echo $this->Html->link('Orders Items', array('controller' => 'order_items', 'action' => 'index', 'admin' => true)); ?>  &nbsp; 
+		<?php echo $this->Html->link('Orders', array('controller' => 'orders', 'action' => 'index', 'admin' => true)); ?> &nbsp;
+		<?php echo $this->Html->link('Orders Items', array('controller' => 'order_items', 'action' => 'index', 'admin' => true)); ?>  &nbsp;
 		<?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?>
 	</div>
 </div>
