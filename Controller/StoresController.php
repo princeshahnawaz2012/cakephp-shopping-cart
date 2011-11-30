@@ -59,13 +59,13 @@ class StoresController extends AppController {
 		
 		$ack = strtoupper($paypal["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
-			$this->Session->write('Paypal.review.', $resArray);
+			$this->Session->write('Paypal.review.', $paypal);
 			$this->redirect(array('action' => 'review'));
 		} else {
-			$ErrorCode = urldecode($resArray["L_ERRORCODE0"]);
-			$ErrorShortMsg = urldecode($resArray["L_SHORTMESSAGE0"]);
-			$ErrorLongMsg = urldecode($resArray["L_LONGMESSAGE0"]);
-			$ErrorSeverityCode = urldecode($resArray["L_SEVERITYCODE0"]);
+			$ErrorCode = urldecode($paypal["L_ERRORCODE0"]);
+			$ErrorShortMsg = urldecode($paypal["L_SHORTMESSAGE0"]);
+			$ErrorLongMsg = urldecode($paypal["L_LONGMESSAGE0"]);
+			$ErrorSeverityCode = urldecode($paypal["L_SEVERITYCODE0"]);
 			echo "GetExpressCheckoutDetails API call failed. ";
 			echo "Detailed Error Message: " . $ErrorLongMsg;
 			echo "Short Error Message: " . $ErrorShortMsg;
