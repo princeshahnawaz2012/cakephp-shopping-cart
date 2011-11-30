@@ -1,6 +1,8 @@
 .DS_Store
 cakephp
+Plugin/DebugKit
 Config/database.php
+Config/settings.php
 tmp/cache/models/*
 tmp/cache/persistent/*
 tmp/cache/views/*

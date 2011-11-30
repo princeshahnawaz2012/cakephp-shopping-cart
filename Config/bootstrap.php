@@ -64,4 +64,8 @@ Cache::config('default', array('engine' => 'File'));
  *
  */
 
+CakePlugin::load('DebugKit');
+
+require_once APP . 'Config'  . DS . 'settings.php';
+
 
