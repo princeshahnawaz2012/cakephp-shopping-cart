@@ -8,9 +8,11 @@ h1{display:block;}
 
 #top{width:100%;position:fixed;top:0;left:0;right:0;z-index:10;overflow:visible;background:#222222;}
 
-#menu{display:block;margin-left:auto;margin-right:auto;position:relative;padding:12px;width:980px;overflow:hidden;color:#FFFFFF;font-size:13px;text-decoration:none;}
+#menu{display:block;margin-left:auto;margin-right:auto;position:relative;padding:12px;width:980px;overflow:hidden;font-size:13px;text-decoration:none;}
 
-#menu a,#menu a:visited{text-decoration:none;color:#FFFFFF;}
+#menu a,#menu a:visited{text-decoration:none;color:#EEEEEE;}
+
+#menu a:hover{text-decoration:none;color:#FFFFFF;}
 
 #footer{margin-top:15px;padding-top:15px;border-top:1px solid #EEEEEE;}
 

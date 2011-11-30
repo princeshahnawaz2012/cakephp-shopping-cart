@@ -2,10 +2,6 @@
 
 <?php echo $this->Html->script(array('cart.js')); ?>
 
-
-<?php echo env('HTTP_HOST'); ?>
-
-
 <h1>Shopping Cart</h1>
 
 <br />

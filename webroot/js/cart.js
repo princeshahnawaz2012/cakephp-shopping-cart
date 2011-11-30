@@ -5,8 +5,7 @@ $(document).ready(function(){
 	});
 	
 	$(".remove").each(function() {
-	  	var text = $(this).attr('id').split('_');
-		$(this).replaceWith('<a class="remove" href="/stores/remove/' + text[0] +  '">remove</a>');
+		$(this).replaceWith('<a class="remove" href="/stores/remove/' + $(this).attr('id') + '">remove</a>');
 	});
 	
 });
