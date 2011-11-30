@@ -1,0 +1,8 @@
+.DS_Store
+cakephp
+Config/database.php
+tmp/cache/models/*
+tmp/cache/persistent/*
+tmp/cache/views/*
+tmp/logs/error.log
+tmp/logs/*
