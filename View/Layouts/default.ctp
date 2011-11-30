@@ -4,6 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><?php echo $title_for_layout; ?></title>
 <?php echo $this->Html->css(array('css.css', '960_24_col.css')); ?>
+<?php echo $this->Html->script(array('http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js')); ?>
+
 <?php echo $scripts_for_layout; ?>
 </head>
 <body>
@@ -18,7 +20,7 @@
 	</div>
 </div>
 
-<div id+"footer">&copy; <?php echo date('Y'); ?></div>
+<div id+"footer">&copy; <?php echo date('Y'); ?> <?php echo env('HTTP_HOST'); ?></div>
 
 </body>
 </html>

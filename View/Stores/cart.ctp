@@ -1,5 +1,11 @@
 <?php echo $this->set('title_for_layout', 'Shopping Cart'); ?>
 
+<?php echo $this->Html->script(array('cart.js')); ?>
+
+
+<?php echo env('HTTP_HOST'); ?>
+
+
 <h1>Shopping Cart</h1>
 
 <br />
@@ -28,10 +34,10 @@
 		<strong><?php echo $item['Product']['name']; ?></strong>
 		<br />
 		<br />
-		<div class="font10"><?php echo $this->Html->link('Remove', array('action' => 'remove', $item['Product']['id'])); ?></div>
+		<div class="font10"><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></div>
 	</div>
 	<div class="grid_3"><div class="right">$<?php echo $item['Product']['price']; ?></div></div>
-	<div class="grid_3"><div class="right"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'label' => false, 'size' => 2, 'maxlength' => 2, 'value' => $item['quantity'])); ?></div></div>
+	<div class="grid_3"><div class="right"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric', 'label' => false, 'size' => 2, 'maxlength' => 2, 'value' => $item['quantity'])); ?></div></div>
 	<div class="grid_4">
 		<div class="red bold right">$<?php echo $item['subtotal']; ?></div>
 	</div>
