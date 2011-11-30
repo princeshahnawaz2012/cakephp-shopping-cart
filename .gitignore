@@ -3,9 +3,9 @@ cakephp
 Plugin/DebugKit
 Config/database.php
 Config/settings.php
-tmp/cache/models/*
-tmp/cache/persistent/*
-tmp/cache/views/*
 tmp/logs/error.log
 tmp/logs/debug.log
-tmp/cache/cake_toolbar*
+# tmp/cache/models/*
+# tmp/cache/persistent/*
+# tmp/cache/views/*
+# tmp/cache/cake_toolbar*
