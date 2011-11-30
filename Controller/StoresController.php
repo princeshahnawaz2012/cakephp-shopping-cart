@@ -59,7 +59,7 @@ class StoresController extends AppController {
 		
 		$ack = strtoupper($paypal["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
-			$this->Session->write('Paypal.review', $resArray);
+			$this->Session->write('Paypal.review.', $resArray);
 			$this->redirect(array('action' => 'review'));
 		} else {
 			$ErrorCode = urldecode($resArray["L_ERRORCODE0"]);
@@ -79,7 +79,7 @@ class StoresController extends AppController {
 
 	public function review() {
 		$cart = $this->Session->read('Cart');
-		$paypal = $this->Session->read('Paypal.review');
+		$paypal = $this->Session->read('Paypal');
 		$this->set(compact('cart', 'paypal'));
 	}
 
