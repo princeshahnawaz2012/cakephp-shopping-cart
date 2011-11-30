@@ -1,15 +1,23 @@
 <?php
 class StoresController extends AppController {
 
+//////////////////////////////////////////////////
+
 	public $components = array('Cart', 'Paypal');
 
+//////////////////////////////////////////////////
+
 	public $uses = array('Product');
+
+//////////////////////////////////////////////////
 
 	public function clear() {
 		$this->Session->delete('Cart');
 		$this->Session->delete('Paypal');
 		$this->redirect('/');
 	}
+
+//////////////////////////////////////////////////
 
 	public function add() {
 		if ($this->request->is('post')) {
@@ -20,9 +28,13 @@ class StoresController extends AppController {
 		$this->redirect($this->referer());
 	}
 
+//////////////////////////////////////////////////
+
 	public function update() {
 		$this->Cart->update($this->request->data['Product']['id'], 1);
 	}
+
+//////////////////////////////////////////////////
 
 	public function remove($id = null) {
 		$this->Cart->remove($id);
@@ -30,6 +42,7 @@ class StoresController extends AppController {
 		$this->redirect(array('action' => 'cart'));
 	}
 
+//////////////////////////////////////////////////
 
 	public function cart() {
 
@@ -39,7 +52,7 @@ class StoresController extends AppController {
 				$this->Cart->add($p[1], $value);
 			}
 		}
-		
+
 		$items = $this->Cart->cart();
 		$this->set('items', $items['Products']);
 		$this->set('cartTotal', $items['cartTotal']);
@@ -47,16 +60,20 @@ class StoresController extends AppController {
 		$this->Session->write('Paypal.Payment_Amount', $items['cartTotal']);
 	}
 
+//////////////////////////////////////////////////
+
 	public function step1() {
 		$price = $this->Session->read('Paypal.Payment_Amount');
 		$this->Paypal->step1($price);
 	}
 
+//////////////////////////////////////////////////
+
 	public function step2() {
-		
+
 		$token = $this->request->query['token'];
 		$paypal = $this->Paypal->GetShippingDetails($token);
-		
+
 		$ack = strtoupper($paypal["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
 			$this->Session->write('Paypal.Details', $paypal);
@@ -73,9 +90,10 @@ class StoresController extends AppController {
 			echo "Error Severity Code: " . $ErrorSeverityCode;
 			die();
 		}
-		
-		// debug($this->request);
+
 	}
+
+//////////////////////////////////////////////////
 
 	public function review() {
 		$cart = $this->Session->read('Cart');
@@ -83,10 +101,12 @@ class StoresController extends AppController {
 		$this->set(compact('cart', 'paypal'));
 	}
 
+//////////////////////////////////////////////////
+
 	public function confirm() {
-		
+
 		$price = $this->Session->read('Paypal.Payment_Amount');
-		
+
 		$resArray = $this->Paypal->ConfirmPayment($price);
 		debug($resArray);
 		$ack = strtoupper($resArray["ACK"]);
@@ -94,9 +114,11 @@ class StoresController extends AppController {
 			$paypal = $this->Session->read('Paypal');
 			debug($paypal);
 		}
-		
+
 		debug($this->request);
 	}
+
+//////////////////////////////////////////////////
 
 }
 
