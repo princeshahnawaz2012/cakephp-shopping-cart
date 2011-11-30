@@ -5,7 +5,7 @@ Config/database.php
 Config/settings.php
 tmp/logs/error.log
 tmp/logs/debug.log
-# tmp/cache/models/*
-# tmp/cache/persistent/*
-# tmp/cache/views/*
-# tmp/cache/cake_toolbar*
+tmp/cache/models/*
+tmp/cache/persistent/*
+tmp/cache/views/*
+tmp/cache/cake_toolbar*
