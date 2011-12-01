@@ -54,24 +54,33 @@
 				<?php echo $this->Form->end(); ?>
 
 				<br />
+				<br />
+
+				<?php echo $this->Form->create(null, array('action' => 'checkout')); ?>
+
+				<?php echo $this->Form->button('Checkout'); ?>
+
+				<?php echo $this->Form->end(); ?>
+				<br />
+				<br />
 
 				<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'stores', 'action' => 'step1'))); ?>
 				<input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal' class="sbumit" />
 				<?php echo $this->Form->end(); ?>
-				
+
 				<br />
-				
+
 				<form method="POST" action="https://<?php echo GOOGLE_CHECKOUT_URL; ?>/api/checkout/v2/checkoutForm/Merchant/<?php echo GOOGLE_CHECKOUT_MERCHANT_ID; ?>" accept-charset="utf-8">
 				<?php $counter = 0; ?>
 				<?php foreach ($items as $item): ?>
-				
+
 				<input type="hidden" name="item_name_<?php echo ++$counter; ?>" value="<?php echo $item['Product']['name']; ?>"/>
 				<input type="hidden" name="item_description_<?php echo $counter; ?>" value="<?php echo $item['Product']['name']; ?>"/>
 				<input type="hidden" name="item_quantity_<?php echo $counter; ?>" value="<?php echo $item['quantity']; ?>"/>
 				<input type="hidden" name="item_price_<?php echo $counter; ?>" value="<?php echo $item['Product']['price']; ?>"/>
 				<input type="hidden" name="item_currency_<?php echo $counter; ?>" value="USD"/>
 				<?php endforeach; ?>
-				
+
 				<input type="hidden" name="ship_method_name_1" value="UPS Ground"/>
 				<input type="hidden" name="ship_method_price_1" value="10.99"/>
 				<input type="hidden" name="ship_method_currency_1" value="USD"/>
@@ -80,7 +89,7 @@
 				<input type="hidden" name="_charset_"/>
 				<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://checkout.google.com/buttons/checkout.gif?merchant_id=<?php echo GOOGLE_CHECKOUT_MERCHANT_ID; ?>&w=160&h=43&style=white&variant=text&loc=en_US" height="43" width="160"/>
 				</form>
-				
+
 			</p>
 
 		</p>

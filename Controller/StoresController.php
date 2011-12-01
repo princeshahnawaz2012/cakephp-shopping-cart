@@ -62,6 +62,29 @@ class StoresController extends AppController {
 
 //////////////////////////////////////////////////
 
+	public function checkout() {
+
+	if ($this->request->is('post')) {
+
+		$order = $this->request->data['Order'];
+//		print_r($order);
+
+		$this->loadModel('Order');
+
+		$this->Order->set($this->request->data['Order']);
+		if($this->Order->validates()) {
+			$this->Session->write('Order', $order);
+			$this->redirect(array('action' => 'confirm'));
+		} else {
+		//	debug($this->Order->validationErrors);
+		}
+
+	}
+
+	}
+
+//////////////////////////////////////////////////
+
 	public function step1() {
 		$price = $this->Session->read('Paypal.Payment_Amount');
 		$this->Paypal->step1($price);
@@ -107,13 +130,14 @@ class StoresController extends AppController {
 
 		$price = $this->Session->read('Paypal.Payment_Amount');
 
-		$resArray = $this->Paypal->ConfirmPayment($price);
-		debug($resArray);
-		$ack = strtoupper($resArray["ACK"]);
-		if($ack == "SUCCESS" || $ack == "SUCCESSWITHWARNING") {
-			$paypal = $this->Session->read('Paypal');
-			debug($paypal);
-		}
+		$order = $this->Session->read('Order');
+		//$resArray = $this->Paypal->ConfirmPayment($price);
+		//debug($resArray);
+		//$ack = strtoupper($resArray["ACK"]);
+		//if($ack == "SUCCESS" || $ack == "SUCCESSWITHWARNING") {
+		//	$paypal = $this->Session->read('Paypal');
+		//	debug($paypal);
+		//}
 
 		debug($this->request);
 	}

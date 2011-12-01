@@ -17,4 +17,9 @@ $ <?php echo $product['Product']['price']; ?>
 <?php echo $this->Form->end(); ?>
 
 <br />
+
+<?php echo $product['Product']['description']; ?>
+
+<br />
+<br />
 <br />
