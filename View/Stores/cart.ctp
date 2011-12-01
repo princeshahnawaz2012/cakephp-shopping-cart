@@ -62,7 +62,7 @@
 				<br />
 				<br />
 				
-				<form method="POST" action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/<?php echo GOOGLE_MERCHARD_ID; ?>" accept-charset="utf-8">
+				<form method="POST" action="https://<?php echo GOOGLE_CHECKOUT_URL; ?>/api/checkout/v2/checkoutForm/Merchant/<?php echo GOOGLE_CHECKOUT_MERCHANT_ID; ?>" accept-charset="utf-8">
 				<?php $counter = 0; ?>
 				<?php foreach ($items as $item): ?>
 				
@@ -79,7 +79,7 @@
 				<input type="hidden" name="tax_rate" value="0.08"/>
 				<input type="hidden" name="tax_us_state" value="TX"/>
 				<input type="hidden" name="_charset_"/>
-				<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://checkout.google.com/buttons/checkout.gif?merchant_id=<?php echo GOOGLE_MERCHARD_ID; ?>&w=180&h=46&style=white&variant=text&loc=en_US" height="46" width="180"/>
+				<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://checkout.google.com/buttons/checkout.gif?merchant_id=<?php echo GOOGLE_CHECKOUT_MERCHANT_ID; ?>&w=180&h=46&style=white&variant=text&loc=en_US" height="46" width="180"/>
 				</form>
 				
 			</p>
