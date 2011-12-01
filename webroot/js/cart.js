@@ -1,6 +1,9 @@
 $(document).ready(function(){
 
 	$('.numeric').keypress(function(event) {
+		if (event.keyCode == 13) {
+			return true;
+		}
 		return /\d/.test(String.fromCharCode(event.keyCode));
 	});
 	
