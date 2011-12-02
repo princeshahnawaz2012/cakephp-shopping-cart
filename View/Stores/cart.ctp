@@ -66,27 +66,38 @@
 				<?php echo $this->Form->end(); ?>
 
 				<br />
+				<br />
+				
+<?php
+$xml = '<checkout-shopping-cart xmlns="http://checkout.google.com/schema/2"><shopping-cart><items>';
 
-				<form method="POST" action="https://<?php echo GOOGLE_CHECKOUT_URL; ?>/api/checkout/v2/checkoutForm/Merchant/<?php echo GOOGLE_CHECKOUT_MERCHANT_ID; ?>" accept-charset="utf-8">
-				<?php $counter = 0; ?>
-				<?php foreach ($items as $item): ?>
+foreach($items as $item) {
+$xml .= '<item>
+<item-name>' . $item['Product']['name'] . '</item-name>
+<item-description>' . $item['Product']['name'] . '</item-description>
+<unit-price currency="USD">' . $item['Product']['price'] . '</unit-price>
+<quantity>' . $item['quantity'] . '</quantity>
+</item>';
+};
 
-				<input type="hidden" name="item_name_<?php echo ++$counter; ?>" value="<?php echo $item['Product']['name']; ?>"/>
-				<input type="hidden" name="item_description_<?php echo $counter; ?>" value="<?php echo $item['Product']['name']; ?>"/>
-				<input type="hidden" name="item_quantity_<?php echo $counter; ?>" value="<?php echo $item['quantity']; ?>"/>
-				<input type="hidden" name="item_price_<?php echo $counter; ?>" value="<?php echo $item['Product']['price']; ?>"/>
-				<input type="hidden" name="item_currency_<?php echo $counter; ?>" value="USD"/>
-				<?php endforeach; ?>
+$xml .= '</items></shopping-cart></checkout-shopping-cart>';
+				
+// debug($xml);
 
-				<input type="hidden" name="ship_method_name_1" value="UPS Ground"/>
-				<input type="hidden" name="ship_method_price_1" value="10.99"/>
-				<input type="hidden" name="ship_method_currency_1" value="USD"/>
-				<input type="hidden" name="tax_rate" value="0.08"/>
-				<input type="hidden" name="tax_us_state" value="TX"/>
-				<input type="hidden" name="_charset_"/>
-				<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://checkout.google.com/buttons/checkout.gif?merchant_id=<?php echo GOOGLE_CHECKOUT_MERCHANT_ID; ?>&w=160&h=43&style=white&variant=text&loc=en_US" height="43" width="160"/>
+$cart = base64_encode($xml);
+$signature = base64_encode(hash_hmac('sha1', $xml, GOOGLE_CHECKOUT_MERCHANT_KEY, true));
+?>
+				
+				<form method="POST" action="https://sandbox.google.com/checkout/api/checkout/v2/checkout/Merchant/729483054915369" accept-charset="utf-8">
+					
+				<input type="hidden" name="cart" value="<?php echo $cart; ?>">
+
+				<input type="hidden" name="signature" value="<?php echo $signature; ?>">
+				
+				<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://checkout.google.com/buttons/checkout.gif?merchant_id=729483054915369&w=160&h=43&style=white&variant=text&loc=en_US" height="43" width="160"/>
+				
 				</form>
-
+					
 			</p>
 
 		</p>
