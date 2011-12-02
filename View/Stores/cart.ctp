@@ -8,7 +8,7 @@
 <br />
 
 <?php if(empty($items)) : ?>
-	Shopping Cart is empty
+Shopping Cart is empty
 <?php else: ?>
 
 <?php echo $this->Form->create(); ?>
@@ -50,17 +50,12 @@
 		</p>
 	</div>
 	<div class="clear"></div>
-
 	<br />
-
 	<div class="grid_24">
 		<div class="grid_4 alpha">
-			<p>
-				<?php echo $this->Html->link('Clear Cart', array('controller' => 'stores', 'action' => 'clear')); ?>
-			</p>
+			<p><?php echo $this->Html->link('Clear Cart', array('controller' => 'stores', 'action' => 'clear')); ?></p>
 		</div>
 		<div class="grid_20 omega">
-
 			<table style="float:right;">
 				<tr>
 					<td>
@@ -80,14 +75,10 @@
 					</td>
 				</td>
 			</table>
-
 		</div>
 	</div>
 	<div class="clear"></div>
-
 </div>
-
 <br />
 <br />
-
 <?php endif; ?>
