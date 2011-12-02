@@ -53,6 +53,8 @@ class StoresController extends AppController {
 			}
 		}
 
+		$this->helpers[] = 'Google';
+		
 		$items = $this->Cart->cart();
 		$this->set('items', $items['Products']);
 		$this->set('cartTotal', $items['cartTotal']);

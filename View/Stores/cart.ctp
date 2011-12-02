@@ -68,31 +68,12 @@
 				<br />
 				<br />
 				
-<?php
-$xml = '<checkout-shopping-cart xmlns="http://checkout.google.com/schema/2"><shopping-cart><items>';
-
-foreach($items as $item) {
-$xml .= '<item>
-<item-name>' . $item['Product']['name'] . '</item-name>
-<item-description>' . $item['Product']['name'] . '</item-description>
-<unit-price currency="USD">' . $item['Product']['price'] . '</unit-price>
-<quantity>' . $item['quantity'] . '</quantity>
-</item>';
-};
-
-$xml .= '</items></shopping-cart></checkout-shopping-cart>';
-				
-// debug($xml);
-
-$cart = base64_encode($xml);
-$signature = base64_encode(hash_hmac('sha1', $xml, GOOGLE_CHECKOUT_MERCHANT_KEY, true));
-?>
-				
+			
 				<form method="POST" action="https://sandbox.google.com/checkout/api/checkout/v2/checkout/Merchant/729483054915369" accept-charset="utf-8">
 					
-				<input type="hidden" name="cart" value="<?php echo $cart; ?>">
+				<input type="hidden" name="cart" value="<?php echo $this->Google->cart($items); ?>">
 
-				<input type="hidden" name="signature" value="<?php echo $signature; ?>">
+				<input type="hidden" name="signature" value="<?php echo $this->Google->signature($items); ?>">
 				
 				<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://checkout.google.com/buttons/checkout.gif?merchant_id=729483054915369&w=160&h=43&style=white&variant=text&loc=en_US" height="43" width="160"/>
 				
