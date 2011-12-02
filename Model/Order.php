@@ -1,23 +1,16 @@
 <?php
 App::uses('AppModel', 'Model');
-/**
- * Order Model
- *
- * @property OrderItem $OrderItem
- */
 class Order extends AppModel {
-/**
- * Validation rules
- *
- * @var array
- */
+
+//////////////////////////////////////////////////
+
 	public $validate = array(
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Name is invalid',
 				//'allowEmpty' => false,
-				//'required' => true,
+				'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -25,32 +18,89 @@ class Order extends AppModel {
 		'email' => array(
 			'email' => array(
 				'rule' => array('email'),
-				//'message' => 'Your custom message here',
+				'message' => 'Email is invalid',
 				//'allowEmpty' => false,
-				//'required' => false,
+				'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'status' => array(
+		'phone' => array(
+			'notempty' => array(
+				'rule' => array('phone'),
+				'message' => 'Phone is invalid',
+				//'allowEmpty' => false,
+				'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'billing_address' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Billing Address is invalid',
 				//'allowEmpty' => false,
-				//'required' => false,
+				'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'billing_city' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Billing City is invalid',
+				//'allowEmpty' => false,
+				'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'billing_state' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Billing State is invalid',
+				//'allowEmpty' => false,
+				'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'shipping_address' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Shipping Address is invalid',
+				//'allowEmpty' => false,
+				'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'shipping_city' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Shipping City is invalid',
+				//'allowEmpty' => false,
+				'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'shipping_state' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Shipping State is invalid',
+				//'allowEmpty' => false,
+				'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		
+
 	);
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+//////////////////////////////////////////////////
 
-/**
- * hasMany associations
- *
- * @var array
- */
 	public $hasMany = array(
 		'OrderItem' => array(
 			'className' => 'OrderItem',
@@ -66,5 +116,7 @@ class Order extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+//////////////////////////////////////////////////
 
 }

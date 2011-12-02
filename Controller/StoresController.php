@@ -63,24 +63,16 @@ class StoresController extends AppController {
 //////////////////////////////////////////////////
 
 	public function checkout() {
-
-	if ($this->request->is('post')) {
-
-		$order = $this->request->data['Order'];
-//		print_r($order);
-
-		$this->loadModel('Order');
-
-		$this->Order->set($this->request->data['Order']);
-		if($this->Order->validates()) {
-			$this->Session->write('Order', $order);
-			$this->redirect(array('action' => 'confirm'));
-		} else {
-		//	debug($this->Order->validationErrors);
+		if ($this->request->is('post')) {
+			$this->loadModel('Order');
+			$this->Order->set($this->request->data);
+			if($this->Order->validates()) {
+				echo 'valid';
+				$order = $this->request->data['Order'];
+				$this->Session->write('Order', $order);
+				$this->redirect(array('action' => 'confirm'));
+			}
 		}
-
-	}
-
 	}
 
 //////////////////////////////////////////////////

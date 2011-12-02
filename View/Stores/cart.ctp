@@ -56,11 +56,8 @@
 				<br />
 				<br />
 
-				<?php echo $this->Form->create(null, array('action' => 'checkout')); ?>
-
-				<?php echo $this->Form->button('Checkout'); ?>
-
-				<?php echo $this->Form->end(); ?>
+				<?php echo $this->Html->link('Checkout', array('controller' => 'stores', 'action' => 'checkout')); ?>
+				
 				<br />
 				<br />
 

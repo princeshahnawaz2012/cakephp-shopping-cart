@@ -1,6 +1,6 @@
 html{overflow-y:scroll;margin:0;padding:0px;background:#FBFBFB;}
 
-body{display:block;background:#FFFFFF;margin-top:0;margin-left:auto;margin-right:auto;width:940px;padding:20px;padding-top:55px;border:0px solid #CCCCCC;font-family:Verdana,Arial,sans-serif;font-size:12px;}
+body{display:block;background:#FFFFFF;margin-top:0;margin-left:auto;margin-right:auto;width:940px;padding:20px;padding-top:55px;border:0px solid #CCCCCC;font-family:Verdana,Arial,sans-serif;font-size:11px;}
 
 a,a:visited{color:#333399;}
 
@@ -40,3 +40,7 @@ table tbody th{border-top:1px solid #ddd;vertical-align:top;}
 .middle{text-align:center;}
 
 #flashMessage{margin-top:10px;margin-bottom:10px;padding:10px;background:#EEEEEE;color:#444444;}
+
+label {display: block; margin-top:5px;}
+
+form .error-message {color: #CC0000;font-size:11px;}
