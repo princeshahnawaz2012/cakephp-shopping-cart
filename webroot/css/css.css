@@ -16,12 +16,12 @@ h1{display:block;}
 
 #footer{margin-top:15px;padding-top:15px;border-top:1px solid #EEEEEE;}
 
-table{width:100%;margin-bottom:18px;padding:0;font-size:12px;border-collapse:collapse;}
+/*table{width:100%;margin-bottom:18px;padding:0;font-size:12px;border-collapse:collapse;}
 table th,table td{padding:10px 10px 9px;line-height:12px;text-align:left;}
 table th{padding-top:9px;font-weight:bold;vertical-align:middle;}
 table td{vertical-align top;border-top:1px solid #ddd;}
 table tbody th{border-top:1px solid #ddd;vertical-align:top;}
-
+*/
 .image{border:1px solid #CCCCCC;padding:5px;}
 .image:hover{border:2px solid #CCCCCC;padding:4px;}
 
