@@ -5,7 +5,8 @@ class AppController extends Controller {
 	public $components = array(
 		'Session',
 		'DebugKit.Toolbar',
-		'Auth'
+		'Auth',
+		'Security'
 	);
 
 	public function beforeFilter() {
