@@ -14,6 +14,7 @@
 <br /><br />
 <div id="top">
 	<div id="menu">
+		<h2>AKND</h2>
 		<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?> &nbsp;
 		<?php echo $this->Html->link('Cart', array('controller' => 'stores', 'action' => 'cart')); ?>
 	</div>
