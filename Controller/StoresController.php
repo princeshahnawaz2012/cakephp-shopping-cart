@@ -11,6 +11,12 @@ class StoresController extends AppController {
 
 //////////////////////////////////////////////////
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+	}
+
+//////////////////////////////////////////////////
+
 	public function clear() {
 		$this->Session->delete('Cart');
 		$this->Session->delete('Paypal');
@@ -42,23 +48,26 @@ class StoresController extends AppController {
 		$this->redirect(array('action' => 'cart'));
 	}
 
+
 //////////////////////////////////////////////////
 
-	public function cart() {
-
+	public function cartupdate() {
 		if ($this->request->is('post')) {
 			foreach($this->request->data['Product'] as $key => $value) {
 				$p = explode('-', $key);
 				$this->Cart->add($p[1], $value);
 			}
 		}
+		$this->redirect(array('action' => 'cart'));
+	}
 
+//////////////////////////////////////////////////
+
+	public function cart() {
 		$this->helpers[] = 'Google';
-		
 		$items = $this->Cart->cart();
 		$this->set('items', $items['Products']);
 		$this->set('cartTotal', $items['cartTotal']);
-
 		$this->Session->write('Paypal.Payment_Amount', $items['cartTotal']);
 	}
 

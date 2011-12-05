@@ -11,7 +11,7 @@
 Shopping Cart is empty
 <?php else: ?>
 
-<?php echo $this->Form->create(); ?>
+<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'stores', 'action' => 'cartupdate'))); ?>
 
 <div class="container_24">
 
@@ -71,7 +71,7 @@ Shopping Cart is empty
 					<td>
 						<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'stores', 'action' => 'step1'))); ?>
 						<input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal' class="sbumit" />
-						<?php echo $this->Form->end(); ?>
+						</form>
 					</td>
 				</td>
 			</table>
