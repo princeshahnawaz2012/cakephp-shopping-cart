@@ -6,6 +6,7 @@ class AppController extends Controller {
 		'Session',
 		'DebugKit.Toolbar',
 		'Auth',
+		'Security'
 	);
 
 	public function beforeFilter() {

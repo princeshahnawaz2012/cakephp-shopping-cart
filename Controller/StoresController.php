@@ -13,6 +13,7 @@ class StoresController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
+		$this->Security->validatePost = false;
 	}
 
 //////////////////////////////////////////////////
