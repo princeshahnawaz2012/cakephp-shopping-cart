@@ -2,7 +2,12 @@
 
 <?php echo $this->Html->script(array('cart.js')); ?>
 
+<div class="grid_24">
+	
 <h1>Shopping Cart</h1>
+
+</div>
+<div class="clear"></div>
 
 <br />
 <br />
@@ -12,8 +17,6 @@ Shopping Cart is empty
 <?php else: ?>
 
 <?php echo $this->Form->create(NULL, array('url' => array('controller' => 'stores', 'action' => 'cartupdate'))); ?>
-
-<div class="container_24">
 
 	<div class="grid_2"><p></p></div>
 	<div class="grid_12"><p class="bold grey">DESCRIPTION</p></div>
@@ -78,7 +81,8 @@ Shopping Cart is empty
 		</div>
 	</div>
 	<div class="clear"></div>
-</div>
+
 <br />
 <br />
 <?php endif; ?>
+

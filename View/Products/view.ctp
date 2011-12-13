@@ -1,5 +1,7 @@
 <?php echo $this->set('title_for_layout', $product['Product']['name']); ?>
 
+<div class="grid_24">
+
 <h1><?php echo $product['Product']['name']; ?></h1>
 
 <?php echo $this->Html->Image('/images/' . $product['Product']['image'], array('width' => 150, 'height' => 150, 'alt' => $product['Product']['name'], 'class' => 'image')); ?>
@@ -23,3 +25,6 @@ $ <?php echo $product['Product']['price']; ?>
 <br />
 <br />
 <br />
+
+</div>
+<div class="clear"></div>

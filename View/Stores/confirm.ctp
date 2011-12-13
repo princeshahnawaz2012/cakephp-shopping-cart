@@ -1,4 +1,6 @@
-Confirm Order:
+<div class="grid_24">
+	
+<h1>Confirm Order:</h1>
 
 <br />
 <br />
@@ -32,3 +34,6 @@ Shipping State: <?php echo $order['shipping_state'];?><br />
 
 <br />
 <br />
+
+</div>
+<div class="clear"></div>

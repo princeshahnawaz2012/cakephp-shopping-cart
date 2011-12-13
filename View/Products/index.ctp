@@ -1,14 +1,14 @@
 <?php echo $this->set('title_for_layout', 'Online Shop'); ?>
 
+<div class="grid_24">
 <h1>Online Shop</h1>
 
-<div class="container_24">
 <?php
 $i = 0;
 foreach ($products as $product):
 $i++;
 ?>
-<div class="grid_5 middle">
+<div class="grid_5">
 	<?php echo $this->Html->image('/images/' . $product['Product']['image'], array('url' => array('controller' => 'products', 'action' => 'view', 'slug' => $product['Product']['slug']), 'alt' => $product['Product']['name'], 'width' => 150, 'height' => 150, 'class' => 'image')); ?>
 	<br />
 	<?php echo $this->Html->link($product['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $product['Product']['slug'])); ?>
@@ -24,10 +24,13 @@ $i++;
 </div>
 
 <?php
-if (($i % 4) == 0) { echo "<div class=\"clear\"></div></div>\n<div class=\"container_24\">\n";}
+if (($i % 4) == 0) { echo "<div class=\"clear\"></div>\n";}
 endforeach;
 ?>
-</div>
+
+<div class="clear"></div>
 
 <br />
 <br />
+
+</div>

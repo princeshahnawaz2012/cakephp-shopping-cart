@@ -1,3 +1,5 @@
+<div class="grid_24">
+
 <h1>checkout</h1>
 
 <?php echo $this->Form->create('Order'); ?>
@@ -27,3 +29,5 @@
 <?php echo $this->Form->button('Submit'); ?>
 
 <?php echo $this->Form->end(); ?>
+
+</div>
