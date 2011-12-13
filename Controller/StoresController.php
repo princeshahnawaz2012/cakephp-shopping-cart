@@ -133,8 +133,26 @@ class StoresController extends AppController {
 	public function confirm() {
 
 		$price = $this->Session->read('Paypal.Payment_Amount');
-
+		$cart = $this->Session->read('Cart');
 		$order = $this->Session->read('Order');
+
+		if ($this->request->is('post')) {
+			$this->loadModel('Order');
+			
+			$i = 0;
+			foreach($cart['items'] as $c) {
+				$o['OrderItem'][$i]['quantity'] = $c['quantity'];
+				$o['OrderItem'][$i]['price'] = $c['subtotal'];
+				$i++;
+			}	
+			
+			$o['Order'] = $order;
+			$o['Order']['total'] = $cart['property']['cartTotal'];
+			
+			$this->Order->saveAll($o);
+		}
+
+		$this->set(compact('cart', 'order'));
 		//$resArray = $this->Paypal->ConfirmPayment($price);
 		//debug($resArray);
 		//$ack = strtoupper($resArray["ACK"]);
@@ -143,10 +161,9 @@ class StoresController extends AppController {
 		//	debug($paypal);
 		//}
 
-		debug($this->request);
+		// debug($this->request);
 	}
 
 //////////////////////////////////////////////////
 
 }
-

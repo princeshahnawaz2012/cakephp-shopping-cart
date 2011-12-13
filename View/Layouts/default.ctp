@@ -4,7 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><?php echo $title_for_layout; ?></title>
 <?php echo $this->Html->css(array('css.css', '960_24_col.css')); ?>
-<?php echo $this->Html->script(array('http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js', 'js.js')); ?>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<?php echo $this->Html->script(array('js.js')); ?>
 <?php echo $scripts_for_layout; ?>
 </head>
 <body>
@@ -20,8 +23,14 @@
 		<?php echo $this->Html->link('Cart', array('controller' => 'stores', 'action' => 'cart')); ?>
 	</div>
 </div>
-
+<div id="search">
+	
+	<?php echo $this->Form->create('Product', array('type' => 'GET', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
+	<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'autocomplete' => 'off')); ?>
+	<?php echo $this->Form->submit('Search', array('div' => false, 'class' => 'submit')); ?>
+	<?php echo $this->Form->end(); ?>
+	
+</div>
 <div id+"footer">&copy; <?php echo date('Y'); ?> <?php echo env('HTTP_HOST'); ?></div>
-
 </body>
 </html>
