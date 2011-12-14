@@ -51,7 +51,7 @@ form .error-message {color: #CC0000;font-size:11px;}
 
 #search {
 	position:fixed;
-	top:10px;
+	top:13px;
 	margin-left:750px;
 	z-index:1000;
 	text-align:right;
