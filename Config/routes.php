@@ -31,7 +31,7 @@
 	Router::connect('/', array('controller' => 'products', 'action' => 'index'));
 	Router::connect('/product/:slug', array('controller' => 'products', 'action' => 'view'), array('pass' => array('slug')));
 
-	// Router::connect('/cart/:action/*', array('controller' => 'stores'));
+	// Router::connect('/cart/:action/*', array('controller' => 'shop'));
 
 
 /**

@@ -16,7 +16,7 @@
 Shopping Cart is empty
 <?php else: ?>
 
-<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'stores', 'action' => 'cartupdate'))); ?>
+<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'cartupdate'))); ?>
 
 	<div class="grid_2"><p></p></div>
 	<div class="grid_12"><p class="bold grey">DESCRIPTION</p></div>
@@ -56,13 +56,13 @@ Shopping Cart is empty
 	<br />
 	<div class="grid_24">
 		<div class="grid_4 alpha">
-			<p><?php echo $this->Html->link('Clear Cart', array('controller' => 'stores', 'action' => 'clear')); ?></p>
+			<p><?php echo $this->Html->link('Clear Shopping Cart', array('controller' => 'shop', 'action' => 'clear')); ?></p>
 		</div>
 		<div class="grid_20 omega">
 			<table style="float:right;">
 				<tr>
 					<td>
-						<?php echo $this->Html->link('Checkout', array('controller' => 'stores', 'action' => 'checkout')); ?>
+						<?php echo $this->Html->link('Checkout', array('controller' => 'shop', 'action' => 'checkout')); ?>
 					</td>
 					<td>
 						<form method="POST" action="https://sandbox.google.com/checkout/api/checkout/v2/checkout/Merchant/729483054915369" accept-charset="utf-8">
@@ -72,7 +72,7 @@ Shopping Cart is empty
 						</form>
 					</td>
 					<td>
-						<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'stores', 'action' => 'step1'))); ?>
+						<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'step1'))); ?>
 						<input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal' class="sbumit" />
 						</form>
 					</td>

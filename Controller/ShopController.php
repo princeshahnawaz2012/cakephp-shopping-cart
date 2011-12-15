@@ -1,5 +1,5 @@
 <?php
-class StoresController extends AppController {
+class ShopController extends AppController {
 
 //////////////////////////////////////////////////
 
@@ -7,7 +7,7 @@ class StoresController extends AppController {
 
 //////////////////////////////////////////////////
 
-	public $uses = array('Product');
+	public $uses = 'Product';
 
 //////////////////////////////////////////////////
 
@@ -19,8 +19,7 @@ class StoresController extends AppController {
 //////////////////////////////////////////////////
 
 	public function clear() {
-		$this->Session->delete('Cart');
-		$this->Session->delete('Paypal');
+		$this->Session->delete('Shop');
 		$this->redirect('/');
 	}
 
@@ -69,7 +68,6 @@ class StoresController extends AppController {
 		$items = $this->Cart->cart();
 		$this->set('items', $items['Products']);
 		$this->set('cartTotal', $items['cartTotal']);
-		$this->Session->write('Paypal.Payment_Amount', $items['cartTotal']);
 	}
 
 //////////////////////////////////////////////////
@@ -81,7 +79,7 @@ class StoresController extends AppController {
 			if($this->Order->validates()) {
 				echo 'valid';
 				$order = $this->request->data['Order'];
-				$this->Session->write('Order', $order);
+				$this->Session->write('Shop.Order', $order);
 				$this->redirect(array('action' => 'confirm'));
 			}
 		}
@@ -90,7 +88,7 @@ class StoresController extends AppController {
 //////////////////////////////////////////////////
 
 	public function step1() {
-		$price = $this->Session->read('Paypal.Payment_Amount');
+		$price = $this->Session->read('Shop.Cart.property.cartTotal');
 		$this->Paypal->step1($price);
 	}
 
@@ -103,7 +101,7 @@ class StoresController extends AppController {
 
 		$ack = strtoupper($paypal["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
-			$this->Session->write('Paypal.Details', $paypal);
+			$this->Session->write('Shop.Paypal.Details', $paypal);
 			$this->redirect(array('action' => 'review'));
 		} else {
 			$ErrorCode = urldecode($paypal["L_ERRORCODE0"]);
@@ -123,36 +121,34 @@ class StoresController extends AppController {
 //////////////////////////////////////////////////
 
 	public function review() {
-		$cart = $this->Session->read('Cart');
-		$paypal = $this->Session->read('Paypal');
-		$this->set(compact('cart', 'paypal'));
+		$shop = $this->Session->read('Shop.Cart');
+		$this->set(compact('shop'));
 	}
 
 //////////////////////////////////////////////////
 
 	public function confirm() {
 
-		$price = $this->Session->read('Paypal.Payment_Amount');
-		$cart = $this->Session->read('Cart');
-		$order = $this->Session->read('Order');
+		$price = $this->Session->read('Shop.Paypal.Payment_Amount');
+		$shop = $this->Session->read('Shop');
 
 		if ($this->request->is('post')) {
 			$this->loadModel('Order');
 			
 			$i = 0;
-			foreach($cart['items'] as $c) {
+			foreach($shop['Cart']['items'] as $c) {
 				$o['OrderItem'][$i]['quantity'] = $c['quantity'];
 				$o['OrderItem'][$i]['price'] = $c['subtotal'];
 				$i++;
 			}	
 			
-			$o['Order'] = $order;
-			$o['Order']['total'] = $cart['property']['cartTotal'];
+			$o['Order'] = $shop['Order'];
+			$o['Order']['total'] = $shop['Cart']['property']['cartTotal'];
 			
 			$this->Order->saveAll($o);
 		}
 
-		$this->set(compact('cart', 'order'));
+		$this->set(compact('shop'));
 		//$resArray = $this->Paypal->ConfirmPayment($price);
 		//debug($resArray);
 		//$ack = strtoupper($resArray["ACK"]);

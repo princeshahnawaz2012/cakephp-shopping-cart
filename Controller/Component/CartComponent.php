@@ -48,29 +48,29 @@ class CartComponent extends Component {
 		$data['subtotal'] = sprintf('%01.2f', $product['Product']['price'] * $quantity);
 		
 		$data['Product'] = $product['Product'];
-		$this->Session->write('Cart.items.' . $id, $data);    
+		$this->Session->write('Shop.Cart.items.' . $id, $data);    
 
 		$cart = $this->cart();
 		$d['cartTotal'] = $cart['cartTotal'];
 		$d['cartQuantity'] = $cart['cartQuantity'];
-		$this->Session->write('Cart.property', $d);    
+		$this->Session->write('Shop.Cart.property', $d);    
 
 	}
 
 //////////////////////////////////////////////////
 
     public function remove($id) {
-		$this->Session->delete('Cart.items.' . $id);
+		$this->Session->delete('Shop.Cart.items.' . $id);
 		$cart = $this->cart();
 		$d['cartTotal'] = $cart['cartTotal'];
 		$d['cartQuantity'] = $cart['cartQuantity'];
-		$this->Session->write('Cart.property', $d);
+		$this->Session->write('Shop.Cart.property', $d);
 	}
 
 //////////////////////////////////////////////////
 
 	public function cart() {
-		$cart = $this->Session->read('Cart');
+		$cart = $this->Session->read('Shop.Cart');
 		$cartTotal = 0;
 		$cartQuantity = 0;
 		if (count($cart['items']) > 0) {

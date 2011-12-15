@@ -16,7 +16,7 @@ $i++;
 <br />
 $<?php echo $product['Product']['price']; ?>
 <br />
-<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'stores', 'action' => 'add'))); ?>
+<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'add'))); ?>
 <?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $product['Product']['id'])); ?>
 <?php echo $this->Form->button('Add to Cart');?>
 <?php echo $this->Form->end();?>

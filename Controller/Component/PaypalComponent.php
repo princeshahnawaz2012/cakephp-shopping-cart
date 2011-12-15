@@ -55,13 +55,13 @@ class PaypalComponent extends Component {
 		$nvpstr .= "&RETURNURL=" . $this->returnURL;
 		$nvpstr .= "&CANCELURL=" . $this->cancelURL;
 		$nvpstr .= "&PAYMENTREQUEST_0_CURRENCYCODE=" . $this->currencyCodeType;
-		$this->Session->write('Paypal.currencyCodeType', $this->currencyCodeType);    
-		$this->Session->write('Paypal.PaymentType', $this->paymentType);    
+		$this->Session->write('Shop.Paypal.currencyCodeType', $this->currencyCodeType);    
+		$this->Session->write('Shop.Paypal.PaymentType', $this->paymentType);    
 	    $resArray = $this->hash_call("SetExpressCheckout", $nvpstr);
 		$ack = strtoupper($resArray["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCCESSWITHWARNING") {
 			$token = urldecode($resArray["TOKEN"]);
-			$this->Session->write('Paypal.TOKEN', $token);    
+			$this->Session->write('Shop.Paypal.TOKEN', $token);    
 		}
 	    return $resArray;
 	}
@@ -72,7 +72,7 @@ class PaypalComponent extends Component {
 	    $resArray = $this->hash_call('GetExpressCheckoutDetails', '&TOKEN=' . $token);
 	    $ack = strtoupper($resArray['ACK']);
 		if($ack == 'SUCCESS' || $ack == 'SUCCESSWITHWARNING') {	
-			$this->Session->write('Paypal.payer_id', $resArray['PAYERID']);    
+			$this->Session->write('Shop.Paypal.payer_id', $resArray['PAYERID']);    
 		} 
 		return $resArray;
 	}
@@ -80,7 +80,7 @@ class PaypalComponent extends Component {
 //////////////////////////////////////////////////
 
 	public function ConfirmPayment($FinalPaymentAmt) {
-		$paypal = $this->Session->read('Paypal');
+		$paypal = $this->Session->read('Shop.Paypal');
 		$token 				= urlencode($paypal['TOKEN']);
 		$paymentType 		= urlencode($paypal['PaymentType']);
 		$currencyCodeType 	= urlencode($paypal['currencyCodeType']);
@@ -120,8 +120,8 @@ class PaypalComponent extends Component {
 		$nvpResArray = $this->deformatNVP($response);
 		$nvpReqArray = $this->deformatNVP($nvpreq);
 		if (curl_errno($ch)) {
-			$this->Session->write('Paypal.curl_error_no', curl_errno($ch));    
-			$this->Session->write('Paypal.curl_error_msg', curl_error($ch));    
+			$this->Session->write('Shop.Paypal.curl_error_no', curl_errno($ch));    
+			$this->Session->write('Shop.Paypal.curl_error_msg', curl_error($ch));    
 		} else {
 		  	curl_close($ch);
 		}
