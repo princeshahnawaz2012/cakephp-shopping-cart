@@ -1,4 +1,4 @@
-Order:
+Shop Order:
 
 Name: <?php echo $shop['Data']['name'];?>
 
