@@ -157,7 +157,18 @@ class ShopController extends AppController {
 			}
 			$save = $this->Order->saveAll($o, array('validate' => 'first'));
 			if($save) {
-				$this->redirect(array('action' => 'success'));
+				
+				$this->set(compact('shop'));
+				
+				App::uses('CakeEmail', 'Network/Email');
+				$email = new CakeEmail();
+				$email->from('andras@andraskende.com')
+						->to('andras@kende.com')
+						->subject('Shop Order')
+						->template('order')
+						->emailFormat('text')
+						->send();
+				//$this->redirect(array('action' => 'success'));
 			}
 		}
 
