@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 02, 2011 at 12:24 PM
+-- Generation Time: Dec 16, 2011 at 01:53 AM
 -- Server version: 5.5.15
 -- PHP Version: 5.3.6
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `billing_addresss` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `billing_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `billing_address2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `billing_city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `billing_state` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
