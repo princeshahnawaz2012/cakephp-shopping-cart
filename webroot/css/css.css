@@ -1,8 +1,8 @@
 html{overflow-y:scroll;margin:0;padding:0px;background:#FBFBFB;}
 
-body{}
+body{padding-top:55px;}
 
-.body{background:#FFFFFF;padding-top:55px;}
+.body{background:#FFFFFF;}
 
 a,a:visited{color:#333399;}
 

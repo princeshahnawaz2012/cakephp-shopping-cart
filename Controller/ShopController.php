@@ -82,7 +82,9 @@ class ShopController extends AppController {
 			if($this->Order->validates()) {
 				echo 'valid';
 				$order = $this->request->data['Order'];
+				$order['order_type'] = 'creditcard';
 				$this->Session->write('Shop.Order', $order);
+				$this->Session->write('Shop.Data', $order);
 				$this->redirect(array('action' => 'confirm'));
 			}
 		}
@@ -105,7 +107,7 @@ class ShopController extends AppController {
 		$ack = strtoupper($paypal["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
 			$this->Session->write('Shop.Paypal.Details', $paypal);
-			$this->redirect(array('action' => 'review'));
+			$this->redirect(array('action' => 'confirm'));
 		} else {
 			$ErrorCode = urldecode($paypal["L_ERRORCODE0"]);
 			$ErrorShortMsg = urldecode($paypal["L_SHORTMESSAGE0"]);
@@ -123,13 +125,6 @@ class ShopController extends AppController {
 
 //////////////////////////////////////////////////
 
-	public function review() {
-		$shop = $this->Session->read('Shop.Cart');
-		$this->set(compact('shop'));
-	}
-
-//////////////////////////////////////////////////
-
 	public function confirm() {
 
 		$price = $this->Session->read('Shop.Paypal.Payment_Amount');
@@ -140,27 +135,66 @@ class ShopController extends AppController {
 			
 			$i = 0;
 			foreach($shop['Cart']['items'] as $c) {
+				$o['OrderItem'][$i]['name'] = $c['Product']['name'];
 				$o['OrderItem'][$i]['quantity'] = $c['quantity'];
 				$o['OrderItem'][$i]['price'] = $c['subtotal'];
 				$i++;
 			}	
 			
-			$o['Order'] = $shop['Order'];
+			$o['Order'] = $shop['Data'];
 			$o['Order']['total'] = $shop['Cart']['property']['cartTotal'];
-			
-			$this->Order->saveAll($o);
+
+			$o['Order']['status'] = 1;
+
+			if($shop['Data']['order_type'] == 'paypal') {
+				$resArray = $this->Paypal->ConfirmPayment($o['Order']['total']);
+				// debug($resArray);
+				$ack = strtoupper($resArray["ACK"]);
+				if($ack == "SUCCESS" || $ack == "SUCCESSWITHWARNING") {
+					$o['Order']['status'] = 2;
+					
+				}
+			}
+			$save = $this->Order->saveAll($o, array('validate' => 'first'));
+			if($save) {
+				$this->redirect(array('action' => 'success'));
+			}
+		}
+
+		if(empty($shop['Data']) && !empty($shop['Paypal']['Details'])) {
+			$shop['Data']['name'] = $shop['Paypal']['Details']['FIRSTNAME'] . ' ' . $shop['Paypal']['Details']['LASTNAME'];
+			$shop['Data']['email'] = $shop['Paypal']['Details']['EMAIL'];
+			$shop['Data']['phone'] = '';
+			$shop['Data']['billing_address'] = $shop['Paypal']['Details']['SHIPTOSTREET'];
+			$shop['Data']['billing_address2'] = '';
+			$shop['Data']['billing_city'] = $shop['Paypal']['Details']['SHIPTOCITY'];
+			$shop['Data']['billing_zipcode'] = $shop['Paypal']['Details']['SHIPTOZIP'];
+			$shop['Data']['billing_state'] = $shop['Paypal']['Details']['SHIPTOSTATE'];
+
+			$shop['Data']['shipping_address'] = $shop['Paypal']['Details']['SHIPTOSTREET'];
+			$shop['Data']['shipping_address2'] = '';
+			$shop['Data']['shipping_city'] = $shop['Paypal']['Details']['SHIPTOCITY'];
+			$shop['Data']['shipping_zipcode'] = $shop['Paypal']['Details']['SHIPTOZIP'];
+			$shop['Data']['shipping_state'] = $shop['Paypal']['Details']['SHIPTOSTATE'];
+
+			$shop['Data']['order_type'] = 'paypal';
+
+			$this->Session->write('Shop.Data', $shop['Data']);
 		}
 
 		$this->set(compact('shop'));
-		//$resArray = $this->Paypal->ConfirmPayment($price);
-		//debug($resArray);
-		//$ack = strtoupper($resArray["ACK"]);
-		//if($ack == "SUCCESS" || $ack == "SUCCESSWITHWARNING") {
-		//	$paypal = $this->Session->read('Paypal');
-		//	debug($paypal);
-		//}
+		
+	}
 
-		// debug($this->request);
+//////////////////////////////////////////////////
+
+	public function success() {
+		$shop = $this->Session->read('Shop');
+		$this->Session->delete('Shop');
+		if(empty($shop)) {
+			$this->redirect('/');
+		}
+		$this->set(compact('shop'));
 	}
 
 //////////////////////////////////////////////////
