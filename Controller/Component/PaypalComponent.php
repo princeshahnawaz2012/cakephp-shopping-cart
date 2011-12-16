@@ -23,8 +23,8 @@ class PaypalComponent extends Component {
 		$this->API_Signature = API_SIGNATURE;
 		$this->version = 64;
 		$this->SandboxFlag = true;
-		$this->returnURL = WEBSITE . '/stores/step2';
-		$this->cancelURL = WEBSITE . '/stores/cart';
+		$this->returnURL = WEBSITE . '/shop/step2';
+		$this->cancelURL = WEBSITE . '/shop/cart';
 		$this->paymentType = 'Sale';
 		$this->currencyCodeType = 'USD';
 		$this->sBNCode = 'PP-ECWizard';

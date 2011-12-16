@@ -1,6 +1,6 @@
 <div class="grid_24">
 
-<h1>checkout</h1>
+<h1>Checkout</h1>
 
 <?php echo $this->Form->create('Order'); ?>
 
@@ -10,6 +10,8 @@
 
 <?php echo $this->Form->input('phone'); ?>
 
+<br />
+
 <?php echo $this->Form->input('billing_address'); ?>
 
 <?php echo $this->Form->input('billing_address2'); ?>
@@ -18,6 +20,8 @@
 
 <?php echo $this->Form->input('billing_state'); ?>
 
+<br />
+
 <?php echo $this->Form->input('shipping_address'); ?>
 
 <?php echo $this->Form->input('shipping_address2'); ?>
@@ -25,6 +29,8 @@
 <?php echo $this->Form->input('shipping_city'); ?>
 
 <?php echo $this->Form->input('shipping_state'); ?>
+
+<br />
 
 <?php echo $this->Form->button('Submit'); ?>
 

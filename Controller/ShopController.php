@@ -29,9 +29,11 @@ class ShopController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$id = $this->request->data['Product']['id'];
-			$this->Cart->add($id, 1);
+			$product = $this->Cart->add($id, 1);
 		}
-		$this->Session->setFlash('Product has added to cart');
+		if(!empty($product)) {
+			$this->Session->setFlash($product['Product']['name'] . ' has been added to cart');
+		}
 		$this->redirect($this->referer());
 	}
 
@@ -89,8 +91,8 @@ class ShopController extends AppController {
 //////////////////////////////////////////////////
 
 	public function step1() {
-		$price = $this->Session->read('Shop.Cart.property.cartTotal');
-		$this->Paypal->step1($price);
+		$paymentAmount = $this->Session->read('Shop.Cart.property.cartTotal');
+		$this->Paypal->step1($paymentAmount);
 	}
 
 //////////////////////////////////////////////////

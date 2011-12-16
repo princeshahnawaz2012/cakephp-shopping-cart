@@ -37,6 +37,7 @@ class CartComponent extends Component {
 		}
 	
 		$product = $this->controller->Product->find('first', array(
+			'recursive' => -1,
 			'conditions' => array(
 				'Product.id' => $id
 			)
@@ -54,7 +55,8 @@ class CartComponent extends Component {
 		$d['cartTotal'] = $cart['cartTotal'];
 		$d['cartQuantity'] = $cart['cartQuantity'];
 		$this->Session->write('Shop.Cart.property', $d);    
-
+		
+		return $product;
 	}
 
 //////////////////////////////////////////////////

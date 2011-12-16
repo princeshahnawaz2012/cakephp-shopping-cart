@@ -5,7 +5,7 @@
 <br />
 <?php echo $this->Form->create('Product', array('type' => 'GET')); ?>
 <?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'autocomplete' => 'off', 'value' => $search)); ?>
-<?php echo $this->Form->submit('Search', array('div' => false, 'class' => 'submit')); ?>
+<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'submit')); ?>
 <?php echo $this->Form->end(); ?>
 <br />
 </div>

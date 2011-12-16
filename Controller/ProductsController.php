@@ -11,11 +11,14 @@ class ProductsController extends AppController {
 //////////////////////////////////////////////////
 
 	public function index() {
-		$products = $this->Product->find('all', array(
-		'recursive' => -1,
-		'order' => 'RAND()',
-		'limit' => 50,
-		));
+		$this->Paginator = $this->Components->load('Paginator');
+		$this->Paginator->settings = array(
+			'recursive' => -1,
+			'limit' => 5,
+			'order' => 'RAND()',
+			'paramType' => 'querystring',
+		);
+		$products = $this->Paginator->paginate();
 		$this->set(compact('products'));
 	}
 
