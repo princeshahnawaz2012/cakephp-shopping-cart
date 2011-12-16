@@ -162,7 +162,7 @@ class ShopController extends AppController {
 				
 				App::uses('CakeEmail', 'Network/Email');
 				$email = new CakeEmail();
-				$email->from('SHOP<andras@kende.com>')
+				$email->from('andras@kende.com')
 						->cc('andras@kende.com')
 						->to($shop['Data']['email'])
 						->subject('Shop Order')
