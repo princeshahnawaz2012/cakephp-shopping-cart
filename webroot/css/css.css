@@ -160,3 +160,13 @@ z-index: 1000;
 text-align: right;
 }
 
+
+.cake-sql-log th {
+	background: #CCCCCC;
+	padding: 2px;
+	border: 1px solid #CCCCCC;
+}
+.cake-sql-log td {
+	padding: 2px;
+	border: 1px solid #CCCCCC;
+}
