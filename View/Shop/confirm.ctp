@@ -2,20 +2,20 @@
 	
 <h1>Confirm Order:</h1>
 
-<table width="100%">
+<table>
 	<tr>
-		<td colspan="2">DESCRIPTION</td>
-		<td>ITEM PRICE</td>
-		<td>QUANTITY</td>
-		<td>EXTENDED PRICE</td>
+		<th colspan="2">ITEM</th>
+		<th class="right">PRICE</th>
+		<th class="right">QUANTITY</th>
+		<th class="right">TOTAL</th>
 	</tr>
 <?php foreach ($shop['Cart']['items'] as $item): ?>
 	<tr>
-		<td width="80"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 70)); ?></td>
-		<td width="600"><strong><?php echo $item['Product']['name']; ?></strong></td>
-		<td>$<?php echo $item['Product']['price']; ?></td>
-		<td><?php echo $item['quantity']; ?></td>
-		<td>$<?php echo $item['subtotal']; ?></td>
+		<td width="80"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60)); ?></td>
+		<td><strong><?php echo $item['Product']['name']; ?></strong></td>
+		<td width="80" class="right">$<?php echo $item['Product']['price']; ?></td>
+		<td width="80" class="right"><?php echo $item['quantity']; ?></td>
+		<td width="80" class="right">$<?php echo $item['subtotal']; ?></td>
 	</tr>
 <?php endforeach; ?>
 </table>
@@ -24,7 +24,7 @@
 <br />
 
 Items: <?php echo $shop['Cart']['property']['cartQuantity'];?><br />
-Total: $<?php echo $shop['Cart']['property']['cartTotal'];?><br />
+Order Total: <span class="bold red">$<?php echo $shop['Cart']['property']['cartTotal']; ?></span><br />
 
 <br />
 

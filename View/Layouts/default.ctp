@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><?php echo $title_for_layout; ?></title>
-<?php echo $this->Html->css(array('reset.css', 'css.css', 'text.css', '960_24_col.css')); ?>
+<?php echo $this->Html->css(array('reset.css', 'css.css', '960_24_col.css')); ?>
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -20,7 +20,6 @@
 	<div id="menu">
 		<h2>AKND</h2>
 		<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?> &nbsp;
-		<?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?> &nbsp;
 		<?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart')); ?>
 	</div>
 </div>

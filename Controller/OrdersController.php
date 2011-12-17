@@ -1,59 +1,24 @@
 <?php
 App::uses('AppController', 'Controller');
-/**
- * Orders Controller
- *
- * @property Order $Order
- */
 class OrdersController extends AppController {
 
-/**
- * admin_index method
- *
- * @return void
- */
 	public function admin_index() {
 		$this->Order->recursive = 0;
 		$this->set('orders', $this->paginate());
 	}
 
-/**
- * admin_view method
- *
- * @param string $id
- * @return void
- */
 	public function admin_view($id = null) {
 		$this->Order->id = $id;
 		if (!$this->Order->exists()) {
 			throw new NotFoundException(__('Invalid order'));
 		}
-		$this->set('order', $this->Order->read(null, $id));
+		$order = $this->Order->find('first', array(
+			'recursive' => 1,
+			'conditions' => array('Order.id' => $id)
+		));
+		$this->set(compact('order'));
 	}
 
-/**
- * admin_add method
- *
- * @return void
- */
-	public function admin_add() {
-		if ($this->request->is('post')) {
-			$this->Order->create();
-			if ($this->Order->save($this->request->data)) {
-				$this->Session->setFlash(__('The order has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
-			}
-		}
-	}
-
-/**
- * admin_edit method
- *
- * @param string $id
- * @return void
- */
 	public function admin_edit($id = null) {
 		$this->Order->id = $id;
 		if (!$this->Order->exists()) {
@@ -71,12 +36,6 @@ class OrdersController extends AppController {
 		}
 	}
 
-/**
- * admin_delete method
- *
- * @param string $id
- * @return void
- */
 	public function admin_delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
@@ -92,4 +51,5 @@ class OrdersController extends AppController {
 		$this->Session->setFlash(__('Order was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

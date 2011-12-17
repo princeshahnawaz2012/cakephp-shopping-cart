@@ -76,6 +76,12 @@ class ShopController extends AppController {
 //////////////////////////////////////////////////
 
 	public function checkout() {
+		
+		$paymentAmount = $this->Session->read('Shop.Cart.property.cartTotal');
+		if(!$paymentAmount) {
+			$this->redirect('/');
+		}
+		
 		if ($this->request->is('post')) {
 			$this->loadModel('Order');
 			$this->Order->set($this->request->data);
@@ -94,6 +100,9 @@ class ShopController extends AppController {
 
 	public function step1() {
 		$paymentAmount = $this->Session->read('Shop.Cart.property.cartTotal');
+		if(!$paymentAmount) {
+			$this->redirect('/');
+		}
 		$this->Paypal->step1($paymentAmount);
 	}
 
@@ -142,6 +151,7 @@ class ShopController extends AppController {
 			}	
 			
 			$o['Order'] = $shop['Data'];
+			$o['Order']['subtotal'] = $shop['Cart']['property']['cartTotal'];
 			$o['Order']['total'] = $shop['Cart']['property']['cartTotal'];
 
 			$o['Order']['status'] = 1;
