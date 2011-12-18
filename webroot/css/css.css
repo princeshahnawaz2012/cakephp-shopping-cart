@@ -86,6 +86,8 @@ white-space:nowrap;
 
 table td {
 padding: 2px;
+border: 0px solid #CCCCCC;
+vertical-align:baseline;
 }
 
 .image {

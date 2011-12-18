@@ -1,6 +1,8 @@
+<?php echo $this->set('title_for_layout', 'Address'); ?>
+
 <div class="grid_24">
 
-<h1>Checkout</h1>
+<h1>Address</h1>
 
 <?php echo $this->Form->create('Order'); ?>
 

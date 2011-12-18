@@ -8,7 +8,7 @@ $(document).ready(function(){
 	});
 	
 	$(".remove").each(function() {
-		$(this).replaceWith('<a class="remove" href="/shop/remove/' + $(this).attr('id') + '">remove</a>');
+		$(this).replaceWith('<a class="remove" href="/shop/remove/' + $(this).attr('id') + '"><img src="/img/trash.png" alt="Remove" /></a>');
 	});
 	
 });

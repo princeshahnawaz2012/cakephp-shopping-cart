@@ -75,10 +75,10 @@ class ShopController extends AppController {
 
 //////////////////////////////////////////////////
 
-	public function checkout() {
+	public function address() {
 		
-		$paymentAmount = $this->Session->read('Shop.Cart.property.cartTotal');
-		if(!$paymentAmount) {
+		$shop = $this->Session->read('Shop');
+		if(!$shop['Cart']['property']['cartTotal']) {
 			$this->redirect('/');
 		}
 		
@@ -91,9 +91,13 @@ class ShopController extends AppController {
 				$order['order_type'] = 'creditcard';
 				$this->Session->write('Shop.Order', $order);
 				$this->Session->write('Shop.Data', $order);
-				$this->redirect(array('action' => 'confirm'));
+				$this->redirect(array('action' => 'review'));
 			}
 		}
+		if(!empty($shop['Order'])) {
+			$this->request->data['Order'] = $shop['Order'];
+		}
+		
 	}
 
 //////////////////////////////////////////////////
@@ -116,7 +120,7 @@ class ShopController extends AppController {
 		$ack = strtoupper($paypal["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
 			$this->Session->write('Shop.Paypal.Details', $paypal);
-			$this->redirect(array('action' => 'confirm'));
+			$this->redirect(array('action' => 'review'));
 		} else {
 			$ErrorCode = urldecode($paypal["L_ERRORCODE0"]);
 			$ErrorShortMsg = urldecode($paypal["L_SHORTMESSAGE0"]);
@@ -134,7 +138,7 @@ class ShopController extends AppController {
 
 //////////////////////////////////////////////////
 
-	public function confirm() {
+	public function review() {
 
 		$price = $this->Session->read('Shop.Paypal.Payment_Amount');
 		$shop = $this->Session->read('Shop');

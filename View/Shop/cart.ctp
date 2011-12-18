@@ -14,18 +14,19 @@ Shopping Cart is empty
 
 <table>
 	<tr>
-		<th colspan="2">ITEM</th>
-		<th class="right">PRICE</th>
-		<th class="right">QUANTITY</th>
-		<th class="right">TOTAL</th>
+		<th width="80"></th>
+		<th>ITEM</th>
+		<th width="80" class="right">PRICE</th>
+		<th width="80" class="right">QUANTITY</th>
+		<th width="80" class="right">TOTAL</th>
 	</tr>
 <?php foreach ($items as $item): ?>
 	<tr>
-		<td width="80"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60)); ?></td>
-		<td><strong><?php echo $item['Product']['name']; ?></strong><br /><span class="font10"><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></span></td>
-		<td width="80" class="right">$<?php echo $item['Product']['price']; ?></td>
-		<td width="80" class="right"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric', 'label' => false, 'size' => 2, 'maxlength' => 2, 'value' => $item['quantity'])); ?></td>
-		<td width="80" class="right">$<?php echo $item['subtotal']; ?></td>
+		<td><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60)); ?></td>
+		<td><strong><?php echo $item['Product']['name']; ?></strong><br /><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></td>
+		<td class="right">$<?php echo $item['Product']['price']; ?></td>
+		<td class="right"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric', 'label' => false, 'size' => 2, 'maxlength' => 2, 'value' => $item['quantity'])); ?></td>
+		<td class="right">$<?php echo $item['subtotal']; ?></td>
 	</tr>
 <?php endforeach; ?>
 </table>
@@ -66,7 +67,7 @@ Shopping Cart is empty
 				<td>
 					<p class="bold left">
 					
-					<?php echo $this->Html->link('Checkout', array('controller' => 'shop', 'action' => 'checkout')); ?>
+					<?php echo $this->Html->link('Checkout', array('controller' => 'shop', 'action' => 'address')); ?>
 
 					<br />
 					<br />
