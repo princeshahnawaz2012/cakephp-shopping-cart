@@ -76,12 +76,12 @@ class ShopController extends AppController {
 //////////////////////////////////////////////////
 
 	public function address() {
-		
+
 		$shop = $this->Session->read('Shop');
 		if(!$shop['Cart']['property']['cartTotal']) {
 			$this->redirect('/');
 		}
-		
+
 		if ($this->request->is('post')) {
 			$this->loadModel('Order');
 			$this->Order->set($this->request->data);
@@ -97,7 +97,7 @@ class ShopController extends AppController {
 		if(!empty($shop['Order'])) {
 			$this->request->data['Order'] = $shop['Order'];
 		}
-		
+
 	}
 
 //////////////////////////////////////////////////
@@ -145,15 +145,15 @@ class ShopController extends AppController {
 
 		if ($this->request->is('post')) {
 			$this->loadModel('Order');
-			
+
 			$i = 0;
 			foreach($shop['Cart']['items'] as $c) {
 				$o['OrderItem'][$i]['name'] = $c['Product']['name'];
 				$o['OrderItem'][$i]['quantity'] = $c['quantity'];
 				$o['OrderItem'][$i]['price'] = $c['subtotal'];
 				$i++;
-			}	
-			
+			}
+
 			$o['Order'] = $shop['Data'];
 			$o['Order']['subtotal'] = $shop['Cart']['property']['cartTotal'];
 			$o['Order']['total'] = $shop['Cart']['property']['cartTotal'];
@@ -166,14 +166,14 @@ class ShopController extends AppController {
 				$ack = strtoupper($resArray["ACK"]);
 				if($ack == "SUCCESS" || $ack == "SUCCESSWITHWARNING") {
 					$o['Order']['status'] = 2;
-					
+
 				}
 			}
 			$save = $this->Order->saveAll($o, array('validate' => 'first'));
 			if($save) {
-				
+
 				$this->set(compact('shop'));
-				
+
 				App::uses('CakeEmail', 'Network/Email');
 				$email = new CakeEmail();
 				$email->from('andras@kende.com')
@@ -210,7 +210,7 @@ class ShopController extends AppController {
 		}
 
 		$this->set(compact('shop'));
-		
+
 	}
 
 //////////////////////////////////////////////////

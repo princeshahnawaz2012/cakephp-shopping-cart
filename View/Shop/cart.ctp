@@ -3,11 +3,13 @@
 <?php echo $this->Html->script(array('cart.js')); ?>
 
 <div class="grid_24">
-	
+
 <h1>Shopping Cart</h1>
 
 <?php if(empty($items)) : ?>
 Shopping Cart is empty
+</div>
+<div class="clear"></div>
 <?php else: ?>
 
 <?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'cartupdate'))); ?>
@@ -66,7 +68,7 @@ Shopping Cart is empty
 				</td>
 				<td>
 					<p class="bold left">
-					
+
 					<?php echo $this->Html->link('Checkout', array('controller' => 'shop', 'action' => 'address')); ?>
 
 					<br />
@@ -75,17 +77,17 @@ Shopping Cart is empty
 					<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'step1'))); ?>
 					<input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal' class="sbumit" />
 					<?php echo $this->Form->end(); ?>
-					
+
 					<br />
-					
+
 					<form method="POST" action="https://sandbox.google.com/checkout/api/checkout/v2/checkout/Merchant/729483054915369" accept-charset="utf-8">
 					<input type="hidden" name="cart" value="<?php echo $this->Google->cart($items); ?>">
 					<input type="hidden" name="signature" value="<?php echo $this->Google->signature($items); ?>">
 					<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://checkout.google.com/buttons/checkout.gif?merchant_id=729483054915369&w=160&h=43&style=white&variant=text&loc=en_US" height="43" width="160"/>
 					</form>
-					
+
 					</p>
-					
+
 				</td>
 			</td>
 		</table>

@@ -2,7 +2,7 @@
 
 
 <div class="grid_24">
-	
+
 <h1>Order Review</h1>
 
 <table>

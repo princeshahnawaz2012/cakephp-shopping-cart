@@ -40,7 +40,7 @@ class ProductsController extends AppController {
 //////////////////////////////////////////////////
 
 	public function search() {
-		
+
 		$search = null;
 		if(!empty($this->request->query['search']) || !empty($this->request->data['name'])) {
 			$search = empty($this->request->query['search']) ? $this->request->data['name'] : $this->request->query['search'] ;
