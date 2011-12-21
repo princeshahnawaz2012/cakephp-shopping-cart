@@ -4,6 +4,10 @@ class ProductsController extends AppController {
 
 //////////////////////////////////////////////////
 
+	public $components = array('RequestHandler');
+
+//////////////////////////////////////////////////
+
 	public function beforeFilter() {
 		parent::beforeFilter();
 	}
@@ -57,6 +61,9 @@ class ProductsController extends AppController {
 				'limit' => 200,
 				'recursive' => -1
 			));
+			if(count($products) == 1) {
+				$this->redirect(array('controller' => 'products', 'action' => 'view', 'slug' => $products[0]['Product']['slug']));
+			}
 			$terms1 = array_diff($terms1, array(''));
 			$this->set(compact('products', 'terms1'));
 		}
@@ -76,6 +83,31 @@ class ProductsController extends AppController {
 
 	    $keywords = 'search';
 		$this->set(compact('keywords'));
+	}
+
+//////////////////////////////////////////////////
+
+	public function searchjson() {
+
+		$search = null;
+		if(!empty($this->request->query['term'])) {
+			$search = $this->request->query['term'];
+			$terms = explode(' ', trim($search));
+			$terms = array_diff($terms, array(''));
+			$conditions = array();
+			foreach($terms as $term) {
+				$conditions[] = array('Product.name LIKE' => '%' . $term . '%');
+			}
+			$products = $this->Product->find('all', array(
+	            'conditions' => $conditions,
+				'limit' => 200,
+				'recursive' => -1
+			));
+			foreach($products as $product) {
+				$products1[] = $product['Product']['name'];
+			}
+			$this->set(compact('products1'));
+		}
 	}
 
 //////////////////////////////////////////////////
