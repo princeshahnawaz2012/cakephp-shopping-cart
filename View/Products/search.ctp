@@ -11,7 +11,7 @@
 </div>
 <?php endif; ?>
 
-<?php echo $this->Html->script('search.js', array('inline' => false)); ?>
+<?php // echo $this->Html->script('search.js', array('inline' => false)); ?>
 
 <div class="grid_24">
 <br />
