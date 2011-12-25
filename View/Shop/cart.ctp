@@ -20,15 +20,17 @@ Shopping Cart is empty
 		<th>ITEM</th>
 		<th width="80" class="right">PRICE</th>
 		<th width="80" class="right">QUANTITY</th>
-		<th width="80" class="right">TOTAL</th>
+		<th width="80" class="right">SUBTOTAL</th>
+		<th width="30"></th>
 	</tr>
 <?php foreach ($items as $item): ?>
 	<tr>
 		<td><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60)); ?></td>
-		<td><strong><?php echo $item['Product']['name']; ?></strong><br /><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></td>
+		<td><strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong></td>
 		<td class="right">$<?php echo $item['Product']['price']; ?></td>
 		<td class="right"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric', 'label' => false, 'size' => 2, 'maxlength' => 2, 'value' => $item['quantity'])); ?></td>
 		<td class="right">$<?php echo $item['subtotal']; ?></td>
+		<td class="center"><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></td>
 	</tr>
 <?php endforeach; ?>
 </table>

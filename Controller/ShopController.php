@@ -32,7 +32,7 @@ class ShopController extends AppController {
 			$product = $this->Cart->add($id, 1);
 		}
 		if(!empty($product)) {
-			$this->Session->setFlash($product['Product']['name'] . ' has been added to cart');
+			$this->Session->setFlash($product['Product']['name'] . ' was added to your shopping cart.');
 		}
 		$this->redirect($this->referer());
 	}

@@ -6,9 +6,9 @@ $(document).ready(function(){
 		}
 		return /\d/.test(String.fromCharCode(event.keyCode));
 	});
-	
+
 	$(".remove").each(function() {
-		$(this).replaceWith('<a class="remove" href="/shop/remove/' + $(this).attr('id') + '"><img src="/img/icon-remove.gif" alt="Remove" /></a>');
+		 $(this).replaceWith('<a class="remove" href="/shop/remove/' + $(this).attr('id') + '" title="Remove item"><img src="/img/icon-remove.gif" alt="Remove" /></a>');
 	});
-	
+
 });
