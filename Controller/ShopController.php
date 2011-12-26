@@ -46,8 +46,10 @@ class ShopController extends AppController {
 //////////////////////////////////////////////////
 
 	public function remove($id = null) {
-		$this->Cart->remove($id);
-		$this->Session->setFlash('Removed');
+		$product = $this->Cart->remove($id);
+		if(!empty($product)) {
+			$this->Session->setFlash($product['Product']['name'] . ' was removed from your shopping cart');
+		}
 		$this->redirect(array('action' => 'cart'));
 	}
 
