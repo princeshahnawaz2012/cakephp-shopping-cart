@@ -142,7 +142,6 @@ class ShopController extends AppController {
 
 	public function review() {
 
-		$price = $this->Session->read('Shop.Paypal.Payment_Amount');
 		$shop = $this->Session->read('Shop');
 
 		if ($this->request->is('post')) {
