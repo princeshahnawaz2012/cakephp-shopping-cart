@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 16, 2011 at 01:53 AM
+-- Generation Time: Jan 03, 2012 at 03:05 AM
 -- Server version: 5.5.15
 -- PHP Version: 5.3.6
 
@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `subtotal` decimal(8,2) NOT NULL,
   `tax` decimal(8,2) NOT NULL,
   `shipping` decimal(8,2) NOT NULL,
-  `total` decimal(8,2) NOT NULL,
+  `total` decimal(8,2) unsigned NOT NULL,
+  `weight` decimal(8,2) unsigned NOT NULL DEFAULT '0.00',
   `status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
@@ -62,7 +63,9 @@ CREATE TABLE IF NOT EXISTS `order_items` (
   `order_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price` decimal(8,2) NOT NULL,
+  `weight` decimal(8,2) unsigned NOT NULL DEFAULT '0.00',
+  `price` decimal(8,2) unsigned NOT NULL,
+  `subtotal` decimal(8,2) unsigned NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -81,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `price` decimal(8,2) NOT NULL,
+  `weight` decimal(8,2) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -93,17 +97,17 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `slug`, `description`, `image`, `price`, `created`, `modified`) VALUES
-(1, 'Product 1', 'product1', 'description product 1', '1.jpg', '9.95', '2011-10-12 04:04:08', '2011-11-28 06:32:03'),
-(2, 'Product 2', 'product2', 'description product 2', '2.jpg', '19.95', '2011-10-12 04:04:08', '2011-11-28 15:49:29'),
-(3, 'Product 3', 'product3', 'description product 3', '3.jpg', '19.95', '2011-10-12 04:04:10', '2011-11-28 00:50:07'),
-(4, 'Product 4', 'product4', 'description product 4', '4.jpg', '19.95', '2011-10-12 04:04:10', '2011-11-27 13:08:33'),
-(5, 'Product 5', 'product5', 'description product 5', '5.jpg', '19.95', '2011-10-12 04:04:10', '2011-11-28 15:43:53'),
-(6, 'Product 6', 'product6', 'description product 6', '6.jpg', '49.95', '2011-10-12 04:04:10', '2011-11-27 04:19:02'),
-(7, 'Product 7', 'product7', 'description product 7', '7.jpg', '19.95', '2011-10-12 04:04:10', '2011-11-27 09:43:42'),
-(8, 'Product 8', 'product8', 'description product 8', '8.jpg', '79.95', '2011-10-12 04:04:10', '2011-11-27 12:05:26'),
-(9, 'Product 9', 'product9', 'description product 9', '9.jpg', '19.95', '2011-10-12 04:04:10', '2011-11-28 00:50:03'),
-(10, 'Product 10', 'product10', 'description producy 10', '10.jpg', '99.99', '2011-10-12 04:04:10', '2011-11-27 07:43:26');
+INSERT INTO `products` (`id`, `name`, `slug`, `description`, `image`, `price`, `weight`, `created`, `modified`) VALUES
+(1, 'Product 1', 'product1', 'description product 1', '1.jpg', '9.95', '1.00', '2011-10-12 04:04:08', '2011-11-28 06:32:03'),
+(2, 'Product 2', 'product2', 'description product 2', '2.jpg', '19.95', '2.00', '2011-10-12 04:04:08', '2011-11-28 15:49:29'),
+(3, 'Product 3', 'product3', 'description product 3', '3.jpg', '19.95', '3.00', '2011-10-12 04:04:10', '2011-11-28 00:50:07'),
+(4, 'Product 4', 'product4', 'description product 4', '4.jpg', '19.95', '4.00', '2011-10-12 04:04:10', '2011-11-27 13:08:33'),
+(5, 'Product 5', 'product5', 'description product 5', '5.jpg', '19.95', '5.00', '2011-10-12 04:04:10', '2011-11-28 15:43:53'),
+(6, 'Product 6', 'product6', 'description product 6', '6.jpg', '49.95', '6.00', '2011-10-12 04:04:10', '2011-11-27 04:19:02'),
+(7, 'Product 7', 'product7', 'description product 7', '7.jpg', '19.95', '7.00', '2011-10-12 04:04:10', '2011-11-27 09:43:42'),
+(8, 'Product 8', 'product8', 'description product 8', '8.jpg', '79.95', '8.00', '2011-10-12 04:04:10', '2011-11-27 12:05:26'),
+(9, 'Product 9', 'product9', 'description product 9', '9.jpg', '19.95', '9.00', '2011-10-12 04:04:10', '2011-11-28 00:50:03'),
+(10, 'Product 10', 'product10', 'description producy 10', '10.jpg', '99.99', '10.00', '2011-10-12 04:04:10', '2011-11-27 07:43:26');
 
 -- --------------------------------------------------------
 

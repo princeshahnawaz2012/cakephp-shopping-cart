@@ -12,7 +12,7 @@
 		<th class="right">QUANTITY</th>
 		<th class="right">TOTAL</th>
 	</tr>
-<?php foreach ($shop['Cart']['items'] as $item): ?>
+<?php foreach ($shop['Cart']['Items'] as $item): ?>
 	<tr>
 		<td width="80"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60)); ?></td>
 		<td><strong><?php echo $item['Product']['name']; ?></strong></td>
@@ -26,8 +26,8 @@
 <br />
 <br />
 
-Items: <?php echo $shop['Cart']['property']['cartQuantity'];?><br />
-Order Total: <span class="bold red">$<?php echo $shop['Cart']['property']['cartTotal']; ?></span><br />
+Items: <?php echo $shop['Cart']['Property']['cartQuantity'];?><br />
+Order Total: <span class="bold red">$<?php echo $shop['Cart']['Property']['cartTotal']; ?></span><br />
 
 <br />
 

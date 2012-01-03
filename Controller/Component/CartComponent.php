@@ -47,14 +47,17 @@ class CartComponent extends Component {
 		}
 		$data['quantity'] = $quantity;
 		$data['subtotal'] = sprintf('%01.2f', $product['Product']['price'] * $quantity);
+		$data['totalweight'] = sprintf('%01.2f', $product['Product']['weight'] * $quantity);
 
 		$data['Product'] = $product['Product'];
-		$this->Session->write('Shop.Cart.items.' . $id, $data);
+		$this->Session->write('Shop.Cart.Items.' . $id, $data);
 
-		$cart = $this->cart();
-		$d['cartTotal'] = $cart['cartTotal'];
-		$d['cartQuantity'] = $cart['cartQuantity'];
-		$this->Session->write('Shop.Cart.property', $d);
+		$this->cart();
+
+//		$cart = $this->cart();
+//		$d['cartTotal'] = $cart['cartTotal'];
+//		$d['cartQuantity'] = $cart['cartQuantity'];
+//		$this->Session->write('Shop.Cart.property', $d);
 
 		return $product;
 	}
@@ -62,13 +65,10 @@ class CartComponent extends Component {
 //////////////////////////////////////////////////
 
     public function remove($id) {
-		if($this->Session->check('Shop.Cart.items.' . $id)) {
-			$product = $this->Session->read('Shop.Cart.items.' . $id);
-			$this->Session->delete('Shop.Cart.items.' . $id);
-			$cart = $this->cart();
-			$d['cartTotal'] = $cart['cartTotal'];
-			$d['cartQuantity'] = $cart['cartQuantity'];
-			$this->Session->write('Shop.Cart.property', $d);
+		if($this->Session->check('Shop.Cart.Items.' . $id)) {
+			$product = $this->Session->read('Shop.Cart.Items.' . $id);
+			$this->Session->delete('Shop.Cart.Items.' . $id);
+			$this->cart();
 			return $product;
 		}
 		return false;
@@ -80,17 +80,25 @@ class CartComponent extends Component {
 		$cart = $this->Session->read('Shop.Cart');
 		$cartTotal = 0;
 		$cartQuantity = 0;
-		if (count($cart['items']) > 0) {
-			foreach ($cart['items'] as $item) {
+		$cartWeight = 0;
+
+		if (count($cart['Items']) > 0) {
+			foreach ($cart['Items'] as $item) {
 				$cartTotal += $item['subtotal'];
 				$cartQuantity += $item['quantity'];
-
+				$cartWeight += $item['totalweight'];
 			}
-			return array(
-				'Products' => $cart['items'],
-				'cartTotal' => sprintf('%01.2f', $cartTotal),
-				'cartQuantity' => $cartQuantity,
-			);
+			$d['cartTotal'] = $cartTotal;
+			$d['cartQuantity'] = $cartQuantity;
+			$d['cartWeight'] = $cartWeight;
+			$this->Session->write('Shop.Cart.Property', $d);
+			return true;
+//			return array(
+//				'Products' => $cart['items'],
+//				'cartTotal' => sprintf('%01.2f', $cartTotal),
+//				'cartQuantity' => $cartQuantity,
+//				'cartWeight' => $cartWeight,
+//			);
 		}
 		else {
 			return null;
