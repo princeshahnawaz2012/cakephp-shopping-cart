@@ -20,21 +20,11 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-/**
- * Here, we are connecting '/' (base path) to controller called 'Pages',
- * its action called 'display', and we pass a param to select the view file
- * to use (in this case, /app/View/Pages/home.ctp)...
- */
-
-	// Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 	Router::connect('/', array('controller' => 'products', 'action' => 'index'));
 	Router::connect('/product/:slug', array('controller' => 'products', 'action' => 'view'), array('pass' => array('slug')));
 
 	Router::connect('/sitemap.xml', array('controller' => 'products', 'action' => 'sitemap'));
-
-	// Router::connect('/cart/:action/*', array('controller' => 'shop'));
-
 
 /**
  * ...and connect the rest of 'Pages' controller's urls.

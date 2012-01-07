@@ -4,7 +4,7 @@
 </url>
 <?php foreach($products as $product): ?>
 <url>
-<loc><?php echo WEBSITE; ?>/<?php echo $product['Product']['slug']; ?></loc>
+<loc><?php echo WEBSITE; ?>/product/<?php echo $product['Product']['slug']; ?></loc>
 </url>
 <?php endforeach; ?>
 </urlset>
