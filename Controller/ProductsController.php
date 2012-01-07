@@ -112,4 +112,17 @@ class ProductsController extends AppController {
 
 //////////////////////////////////////////////////
 
+	public function sitemap() {
+		$products = $this->Product->find('all', array(
+			'fields' => array('Product.slug'),
+			'recursive' => -1,
+			'order' => array('Product.created' => 'DESC'),
+		));
+		$this->set(compact('products'));
+		$this->layout = 'xml';
+		$this->response->type('xml');
+	}
+
+//////////////////////////////////////////////////
+
 }

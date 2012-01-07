@@ -71,7 +71,7 @@ Shopping Cart is empty
 				<td>
 					<p class="bold left">
 
-					<?php echo $this->Html->link('Checkout', array('controller' => 'shop', 'action' => 'address')); ?>
+					<?php echo $this->Html->link('Proceed to Checkout', array('controller' => 'shop', 'action' => 'address')); ?>
 
 					<br />
 					<br />
