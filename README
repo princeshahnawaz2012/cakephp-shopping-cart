@@ -1,7 +1,7 @@
 A simple Shopping Cart built with CakePHP PHP framework.
 
 
-- CakePHP 2.0
+- CakePHP 2.1
 - PayPal Express Checkout
 - Google Checkout
 
